@@ -26,10 +26,11 @@ jobs:
           name: dist
           path: dist/
 
-  # Publish to TestPyPI first. Every push of a v* tag publishes a release
-  # candidate here, so a broken upload is caught before it reaches PyPI.
+  # A tag such as v0.1.0rc1 or v0.2.0b1 goes here, so an upload can be rehearsed
+  # without touching the real index.
   testpypi:
     needs: build
+    if: ${{ contains(github.ref_name, 'rc') || contains(github.ref_name, 'a') || contains(github.ref_name, 'b') }}
     runs-on: ubuntu-latest
     environment: testpypi
     permissions:
@@ -46,10 +47,13 @@ jobs:
       - name: Publish to TestPyPI
         run: uv publish --publish-url https://test.pypi.org/legacy/
 
-  # Only a tag that looks like a final release (v1.2.3, not v1.2.3rc1) goes to
-  # the real index.
+  # A final tag such as v0.1.0 or v1.2.3 goes here.
+  #
+  # This is deliberately independent of the TestPyPI job rather than chained
+  # after it: a version can only be uploaded once per index, so a rehearsal
+  # upload of the same version number would block the real release.
   pypi:
-    needs: testpypi
+    needs: build
     if: ${{ !contains(github.ref_name, 'rc') && !contains(github.ref_name, 'a') && !contains(github.ref_name, 'b') }}
     runs-on: ubuntu-latest
     environment: pypi
