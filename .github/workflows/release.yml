@@ -21,7 +21,7 @@ jobs:
         run: uvx twine check dist/*
 
       - name: Upload the distributions
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: dist
           path: dist/
@@ -44,7 +44,7 @@ jobs:
         uses: astral-sh/setup-uv@v7
 
       - name: Publish to TestPyPI
-        run: uv publish --index testpypi
+        run: uv publish --publish-url https://test.pypi.org/legacy/
 
   # Only a tag that looks like a final release (v1.2.3, not v1.2.3rc1) goes to
   # the real index.
@@ -65,4 +65,4 @@ jobs:
         uses: astral-sh/setup-uv@v7
 
       - name: Publish to PyPI
-        run: uv publish --index pypi
+        run: uv publish --publish-url https://upload.pypi.org/legacy/
