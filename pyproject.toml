@@ -9,7 +9,7 @@ description = "Read image-based character captchas with a CRNN + CTC model on ON
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
-authors = [{ name = "TODO", email = "todo@example.com" }]
+authors = [{ name = "fxaxg", email = "99973797+fxaxg@users.noreply.github.com" }]
 keywords = ["captcha", "ocr", "crnn", "ctc", "onnx", "recognition", "verification-code"]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -50,9 +50,9 @@ dev = [
 captcha-whisperer = "captcha_whisperer.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/TODO/captcha-whisperer"
-Repository = "https://github.com/TODO/captcha-whisperer"
-Issues = "https://github.com/TODO/captcha-whisperer/issues"
+Homepage = "https://github.com/fxaxg/captcha-whisperer"
+Repository = "https://github.com/fxaxg/captcha-whisperer"
+Issues = "https://github.com/fxaxg/captcha-whisperer/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]

@@ -173,7 +173,7 @@ needs it. It lives in the repository and in the source distribution; fetch it
 from either to retrain.
 
 ```bash
-git clone https://github.com/TODO/captcha-whisperer
+git clone https://github.com/fxaxg/captcha-whisperer
 cd captcha-whisperer
 pip install ".[train]"
 

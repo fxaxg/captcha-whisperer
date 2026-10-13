@@ -161,7 +161,7 @@ curl -X POST http://localhost:8000/ocr \
 和源码包中，需要重训时从这两处取。
 
 ```bash
-git clone https://github.com/TODO/captcha-whisperer
+git clone https://github.com/fxaxg/captcha-whisperer
 cd captcha-whisperer
 pip install ".[train]"
 
