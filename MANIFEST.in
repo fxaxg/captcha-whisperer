@@ -1,0 +1,1 @@
+include src/captcha_whisperer/models/captcha_crnn_weights.npz

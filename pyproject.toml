@@ -1,0 +1,77 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "captcha-whisperer"
+version = "0.1.0"
+description = "Read image-based character captchas with a CRNN + CTC model on ONNX Runtime. No PyTorch, no OpenCV."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{ name = "TODO", email = "todo@example.com" }]
+keywords = ["captcha", "ocr", "crnn", "ctc", "onnx", "recognition", "verification-code"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Image Recognition",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "numpy>=1.23",
+    "pillow>=9.0",
+    "onnxruntime>=1.16",
+]
+
+[project.optional-dependencies]
+server = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.27",
+    "python-multipart>=0.0.9",
+]
+train = [
+    "torch>=2.1",
+    "onnx>=1.15",
+]
+dev = [
+    "pytest>=7.0",
+    "httpx>=0.27",
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.27",
+    "python-multipart>=0.0.9",
+]
+
+[project.scripts]
+captcha-whisperer = "captcha_whisperer.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/TODO/captcha-whisperer"
+Repository = "https://github.com/TODO/captcha-whisperer"
+Issues = "https://github.com/TODO/captcha-whisperer/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+# The ONNX graph ships in the wheel. The retraining weights are declared here so
+# that they reach the sdist, then stripped from the wheel by setup.py.
+[tool.setuptools.package-data]
+captcha_whisperer = ["models/*.onnx", "models/*.npz"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+# Publish targets used by .github/workflows/release.yml (uv publish --index ...).
+[[tool.uv.index]]
+name = "pypi"
+url = "https://pypi.org/simple"
+publish-url = "https://upload.pypi.org/legacy/"
+
+[[tool.uv.index]]
+name = "testpypi"
+url = "https://test.pypi.org/simple"
+publish-url = "https://test.pypi.org/legacy/"
